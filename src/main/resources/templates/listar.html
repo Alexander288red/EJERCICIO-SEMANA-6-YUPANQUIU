@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+    <style>
+        /* Estilo del body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Estilo del encabezado */
+        h1 {
+            color: #0066cc;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            font-size: 32px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Estilo del enlace "Nuevo Producto" */
+        a {
+            text-decoration: none;
+            background-color: #66cc66;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #559955;
+        }
+
+        /* Estilo de la tabla */
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            animation: fadeInTable 1s ease-out;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0066cc;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Estilo de los enlaces dentro de la tabla */
+        a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #004a99;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInTable {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Lista de Productos</h1>
+
+    <!-- Enlace para agregar un nuevo producto -->
+    <a href="/productos/nuevo">Nuevo Producto</a>
+
+    <!-- Tabla de productos -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Fecha Vencimiento</th>
+                <th>Stock Mínimo</th>
+                <th>Stock Máximo</th>
+                <th>Marca</th>
+                <th>Peso</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="producto : ${productos}">
+                <td th:text="${producto.id}"></td>
+                <td th:text="${producto.nombre}"></td>
+                <td th:text="${producto.categoria}"></td>
+                <td th:text="${producto.fechaVencimiento}"></td>
+                <td th:text="${producto.stockMinimo}"></td>
+                <td th:text="${producto.stockMaximo}"></td>
+                <td th:text="${producto.marca}"></td>
+                <td th:text="${producto.peso}"></td>
+                <td>
+                    <a th:href="@{/productos/editar/{id}(id=${producto.id})}">Editar</a> |
+                    <a th:href="@{/productos/eliminar/{id}(id=${producto.id})}">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
